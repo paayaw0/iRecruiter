@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Authentications', type: :request do
+RSpec.describe 'Authentication', type: :request do
   let(:user) { create(:user) }
   let(:valid_attributes) do
     {
@@ -34,7 +34,7 @@ RSpec.describe 'Authentications', type: :request do
         expect(json['message']).to eq('Invalid Credentials')
       end
 
-      it 'no auth_token is present' do 
+      it 'no auth_token is present' do
         expect(json['auth_token']).to be_nil
       end
     end
