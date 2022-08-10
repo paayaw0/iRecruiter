@@ -4,12 +4,12 @@ class JsonWebToken
   class << self
     def encode(payload, exp = 24.hours.from_now)
       payload[:exp] = exp.to_i
-      JWT.encoode(payload, HMAC)
+      JWT.encode(payload, HMAC)
     end
 
     def decode(token)
       body = JWT.decode(token, HMAC)[0]
-      HashWithIndifferentAccess.now(body)
+      HashWithIndifferentAccess.new(body)
     rescue JWT::DecodeError => e
       raise ExceptionHandler::InvalidToken, e.message
     end
