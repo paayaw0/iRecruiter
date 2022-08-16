@@ -1,14 +1,15 @@
 FactoryBot.define do
   factory :candidate do
-    name { "MyString" }
-    email { "MyString" }
+    name { Faker::Internet.name }
+    email { Faker::Internet.email }
     employment_status { "MyString" }
     work_mode { "MyString" }
     linkedin_profile { "MyString" }
     github_profile { "MyString" }
     personal_website { "MyString" }
-    current_location { "MyString" }
+    current_location { Faker::Address.country }
     social_network_profiles { "MyString" }
     hiring_status { "MyString" }
+    employer { Faker::Company.name }
   end
 end
