@@ -8,5 +8,8 @@ RSpec.describe User, type: :model do
   it { should validate_uniqueness_of(:email) }
   it { should validate_presence_of(:username) }
   it { should validate_presence_of(:password_digest) }
+
   # associations
+  it { should have_many(:candidate_trackings) }
+  it { should have_many(:tracked_candidates).through(:candidate_trackings).source(:candidate) }
 end

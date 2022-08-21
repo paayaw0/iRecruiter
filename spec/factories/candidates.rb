@@ -10,6 +10,7 @@ FactoryBot.define do
     current_location { Faker::Address.country }
     social_network_profiles { "MyString" }
     hiring_status { "MyString" }
+    sex { 'M' }
     current_employer { Faker::Company.name }
   end
 end

@@ -9,6 +9,8 @@ RSpec.describe Candidate, type: :model do
   it { should have_many(:projects) }
   it { should have_many(:social_media_profiles) }
   # it { should have_many(:networks) } #friends, associates, colleagues     
+  it { should have_many(:candidate_trackings) }
+  it { should have_many(:tracking_recruiters).class_name('User').through(:candidate_trackings).source(:user) }
 
   # validations 
   it { should validate_presence_of(:email) }
