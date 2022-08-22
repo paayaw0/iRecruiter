@@ -6,7 +6,8 @@ RSpec.describe 'Dashboards', type: :request do
     let!(:headers) do
       {
         'Authorization' => token_generator(recruiter.id),
-        'Content-Type' => 'application/json'
+        'Content-Type' => 'application/json', 
+        'Accept' => "application/vnd.irecruiter.v1+json"
       }
     end
 
@@ -17,6 +18,7 @@ RSpec.describe 'Dashboards', type: :request do
         let(:candidate3) { create(:candidate, hiring_status: 'hired') }
 
         before do
+
           recruiter.tracked_candidates.push(candidate1, candidate2, candidate3)
         end
 
@@ -54,7 +56,9 @@ RSpec.describe 'Dashboards', type: :request do
           expect(response).to have_http_status(200)
         end
 
-        it 'should have link to search_configuration endpoint'
+        it 'should have link to search_configuration endpoint' do
+          expect(json['data']['links']['self']).to eq(dashboard_search_configuration_path)
+        end
       end
     end
   end

@@ -6,7 +6,10 @@ module V1
           {
             data:
               {
-                message: 'You are not tracking any candidate'
+                message: 'You are not tracking any candidate',
+                links: {
+                  self: dashboard_search_configuration_path
+                }
               }
           }
         )
@@ -17,5 +20,9 @@ module V1
     end
 
     def search_configuration; end
+
+    def track_candidate; end
+    
+    def untrack_candidate; end
   end
 end
