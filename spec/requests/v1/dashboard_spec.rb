@@ -37,6 +37,10 @@ RSpec.describe 'Dashboards', type: :request do
           end
           expect(initial_contact['id'].to_i).to eq(candidate1.id)
         end
+
+        it 'should have 200 status code' do  
+          expect(response).to have_http_status(200)
+        end
       end
 
       context 'when recruiter has no tracked candidates' do
