@@ -31,7 +31,7 @@ RSpec.describe 'Authentication', type: :request do
       before { post '/auth/login', params: invalid_attributes, headers: headers }
 
       it 'raises error' do
-        expect(json['message']).to eq('Invalid Credentials')
+        expect(json['error']['message']).to eq('Invalid Credentials')
       end
 
       it 'no auth_token is present' do

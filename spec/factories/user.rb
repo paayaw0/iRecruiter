@@ -5,6 +5,12 @@ FactoryBot.define do
       email  { Faker::Internet.email }
       password { Faker::Internet.password }
       
-      transient { recruiter { true } }
+      trait :recruiter do 
+        recruiter { true }
+      end
+
+      trait :non_recruiter do 
+        recruiter { false }
+      end
     end
   end

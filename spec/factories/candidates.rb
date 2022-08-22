@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :candidate do
-    name { Faker::Internet.name }
     email { Faker::Internet.email }
+    name { email.split('@').join(' ').split('.')[0] }
     employment_status { "MyString" }
     work_mode { "MyString" }
     linkedin_profile { "MyString" }

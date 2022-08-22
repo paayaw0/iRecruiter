@@ -24,11 +24,11 @@ RSpec.describe 'Users', type: :request do
       before { post '/signup', params: valid_attributes, headers: headers }
 
       it 'should return auth_token' do
-        expect(json['auth_token']).not_to be_nil
+        expect(json['data']['auth_token']).not_to be_nil
       end
 
       it 'should return positive message' do
-        expect(json['message']).to eq('Account created successfully')
+        expect(json['data']['message']).to eq('Account created successfully')
       end
 
       it 'return 201 status code' do
@@ -40,11 +40,11 @@ RSpec.describe 'Users', type: :request do
       before { post '/signup', params: invalid_attributes, headers: headers }
 
       it 'should return no auth_token' do
-        expect(json['auth_token']).to be_nil
+        expect(json['error']['auth_token']).to be_nil
       end
 
-      it 'should return positive message' do
-        expect(json['message']).to eq("Validation failed: Password can't be blank, Username can't be blank, Email can't be blank, Password digest can't be blank")
+      it 'should return failed validation message' do
+        expect(json['error']['message']).to eq("Validation failed: Password can't be blank, Username can't be blank, Email can't be blank, Password digest can't be blank")
       end
 
       it 'return 201 status code' do
