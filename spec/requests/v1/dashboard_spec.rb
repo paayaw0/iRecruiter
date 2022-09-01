@@ -4,12 +4,11 @@ RSpec.describe 'Dashboards', type: :request do
   let!(:headers) do
     {
       'Authorization' => token_generator(recruiter.id),
-      'Content-Type' => 'application/json',
       'Accept' => 'application/vnd.irecruiter.v1+json'
     }
   end
 
-  describe 'GET /hiring_pipeline' do
+  describe 'GET /hiring-pipeline' do
     let!(:recruiter) { create(:user, :recruiter) }
 
     context 'return candidates with various hiring details include hiring status' do
@@ -22,7 +21,7 @@ RSpec.describe 'Dashboards', type: :request do
           recruiter.tracked_candidates.push(candidate1, candidate2, candidate3)
         end
 
-        before { get '/dashboard/hiring_pipeline', headers: headers }
+        before { get '/dashboard/hiring-pipeline', headers: headers }
 
         it 'number of tracked candidates by recruiter is 3' do
           expect(json['data'].size).to eq(3)
@@ -46,7 +45,7 @@ RSpec.describe 'Dashboards', type: :request do
       end
 
       context 'when recruiter has no tracked candidates' do
-        before { get '/dashboard/hiring_pipeline', headers: headers }
+        before { get '/dashboard/hiring-pipeline', headers: headers }
 
         it 'message should be no candidates tracked' do
           expect(json['data']['message']).to eq('You are not tracking any candidate')
@@ -63,7 +62,7 @@ RSpec.describe 'Dashboards', type: :request do
     end
   end
 
-  describe 'GET /custom_searches' do
+  describe 'GET /custom-searches' do
     let!(:recruiter) { create(:user, :recruiter) }
 
     context 'list of custom searches if custom searches present' do
@@ -77,7 +76,7 @@ RSpec.describe 'Dashboards', type: :request do
                user_id: recruiter.id)
       end
 
-      before { get '/dashboard/custom_searches', headers: headers }
+      before { get '/dashboard/custom-searches', headers: headers }
 
       context 'display' do
         it '2 custom searches' do
@@ -86,13 +85,12 @@ RSpec.describe 'Dashboards', type: :request do
 
         it 'should have 200 status' do
           expect(response).to have_http_status(200)
-        end
-        
+        end        
       end
     end
 
     context 'link to set a custom search if no custom searches present' do
-      before { get '/dashboard/custom_searches', headers: headers }
+      before { get '/dashboard/custom-searches', headers: headers }
 
       context 'display' do 
         it 'message' do  
@@ -110,5 +108,43 @@ RSpec.describe 'Dashboards', type: :request do
     end
   end
 
-  describe 'GET /search_configuration'
+  describe 'POST /dashboard/create-candidate-search-configuration' do
+    let!(:recruiter) { create(:user, :recruiter) }
+
+    context 'create custom searches with valid payload' do 
+      let!(:valid_payload) {
+        attributes_for(:candidate_search_parameter, :senior_programmer, title_search: 'Senior Software Engineer',
+                                                                        configuration_label: 'Search for Senior Software Engineers'
+                                                                      )
+      }.to_json
+
+      before { post '/dashboard/create-candidate-search-configuration', params: valid_payload, headers: headers }
+
+      it 'should return search parameter' do 
+        expect(json['data']['attributes']['configuration_label']).to eq('Search for Senior Software Engineers')  
+      end
+
+      it 'should return 201 response status' do
+        expect(response).to have_http_status(201)
+      end
+    end
+
+    context 'when payload is invalid' do 
+      let!(:invalid_payload) {
+        attributes_for(:candidate_search_parameter, :senior_programmer, title_search: 'Senior Software Engineer',
+          configuration_label: 'Search for Senior Software Engineers'
+        ).except(:title_search)
+      }.to_json
+
+      before { post '/dashboard/create-candidate-search-configuration', params: invalid_payload, headers: headers }
+
+      it 'should return search parameter' do 
+        expect(json['error']['message']).to eq("Validation failed: Title search can't be blank")  
+      end
+
+      it 'should return 422 response status' do
+        expect(response).to have_http_status(422)
+      end
+    end
+  end
 end

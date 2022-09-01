@@ -21,11 +21,21 @@ module V1
 
     def search_configuration; end
 
+    def create_candidate_search_configuration
+      candidate_search_configuration = current_user.custom_searches.create!(dashboard_params)
+      
+      candidate_search_configuration =
+      CandidateSearchParameterSerializer.new(candidate_search_configuration)
+      .serializable_hash.to_json
+      
+      json_response(candidate_search_configuration, :created)
+    end
+
     def custom_searches
       if current_user.custom_searches.empty?
         json_response(
           {
-            data: 
+            data:
             {
               message: 'You have no custom searches',
               links: {
@@ -34,14 +44,34 @@ module V1
             }
           }
         )
-      else  
+      else
         custom_searches = CandidateSearchParameterSerializer.new(current_user.custom_searches).serializable_hash.to_json
         json_response(custom_searches)
       end
     end
 
     def track_candidate; end
-    
+
     def untrack_candidate; end
+
+    private
+
+    def dashboard_params
+      params.permit(
+        :employment_status,
+        :employment_history,
+        :educational_background,
+        :city,
+        :country,
+        :programming_languages,
+        :web_frameworks,
+        :other_technologies,
+        :title_search,
+        :keyword_search,
+        :level_of_skill,
+        :configuration_label,
+        :search_type
+      )
+    end
   end
 end

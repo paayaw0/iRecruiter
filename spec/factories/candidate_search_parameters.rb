@@ -1,6 +1,17 @@
 FactoryBot.define do
   factory :candidate_search_parameter do
-    user { nil }
+    # user { nil }
+    city { Faker::Address.city }
+    country { Faker::Address.country }
+    employment_status { Faker::Boolean.boolean }
+    employment_history { Faker::Company.name }
+    educational_background { Faker::University.name }
+    programming_languages { Faker::ProgrammingLanguage.name }
+    web_frameworks { 'Ruby on Rails, Phoenix' }
+    search_type { 'loose' }
+    title_search { 'search for Senior Developers' }
+    level_of_skill { 'senior' }
+    configuration_label { 'Senior Devs Search' }
     
     trait :senior_programmer do
       city { 'Accra' }
@@ -12,7 +23,7 @@ FactoryBot.define do
       web_frameworks { 'Ruby on Rails, Phoenix' }
       other_technologies { 'ElasticSearch, PostgreSQL, Redis, AWS, Docker, kubernetes' }
       configuration_label { 'search for Senior Software Engineers' }
-      title_search { 'search for Senior Software Engineers' }
+      title_search { 'Senior Software Engineers' }
       search_type { 'loose'}
     end
 
