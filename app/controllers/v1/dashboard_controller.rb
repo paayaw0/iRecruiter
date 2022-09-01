@@ -1,5 +1,7 @@
 module V1
   class DashboardController < ApplicationController
+    before_action :set_custom_search, only: [:update]
+
     def hiring_pipeline
       if current_user.tracked_candidates.empty?
         json_response(
@@ -21,14 +23,20 @@ module V1
 
     def search_configuration; end
 
-    def create_candidate_search_configuration
-      candidate_search_configuration = current_user.custom_searches.create!(dashboard_params)
+    def create
+      candidate_search_configuration = current_user.custom_searches.create!(custom_search_params)
       
       candidate_search_configuration =
       CandidateSearchParameterSerializer.new(candidate_search_configuration)
       .serializable_hash.to_json
       
       json_response(candidate_search_configuration, :created)
+    end
+
+    def update
+      @custom_search.update!(custom_search_params)
+      @custom_search = CandidateSearchParameterSerializer.new(@custom_search).serializable_hash.to_json
+      json_response(@custom_search, :no_content)
     end
 
     def custom_searches
@@ -56,7 +64,7 @@ module V1
 
     private
 
-    def dashboard_params
+    def custom_search_params
       params.permit(
         :employment_status,
         :employment_history,
@@ -72,6 +80,10 @@ module V1
         :configuration_label,
         :search_type
       )
+    end
+
+    def set_custom_search
+      @custom_search = current_user.custom_searches.find(params[:id])
     end
   end
 end

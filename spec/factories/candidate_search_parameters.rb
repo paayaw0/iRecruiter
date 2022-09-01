@@ -23,7 +23,7 @@ FactoryBot.define do
       web_frameworks { 'Ruby on Rails, Phoenix' }
       other_technologies { 'ElasticSearch, PostgreSQL, Redis, AWS, Docker, kubernetes' }
       configuration_label { 'search for Senior Software Engineers' }
-      title_search { 'Senior Software Engineers' }
+      title_search { 'Senior Software Engineer' }
       search_type { 'loose'}
     end
 

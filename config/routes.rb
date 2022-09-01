@@ -4,8 +4,9 @@ Rails.application.routes.draw do
     get '/dashboard/search-configuration', to: 'dashboard#search_configuration'
     get '/dashboard/custom-searches', to: 'dashboard#custom_searches'
 
-    post '/dashboard/create-candidate-search-configuration', to: 'dashboard#create_candidate_search_configuration'
-    
+    post '/dashboard/create-candidate-search-configuration', to: 'dashboard#create'
+    patch '/dashboard/:id/update-candidate-search-configuration', to: 'dashboard#update'
+
     post '/auth/login', to: 'authentication#authenticate'
     post '/signup', to: 'users#create'
   end

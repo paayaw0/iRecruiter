@@ -147,4 +147,33 @@ RSpec.describe 'Dashboards', type: :request do
       end
     end
   end
+
+  describe 'PATCH /dashboard/:id/update-candidate-search-configuration' do 
+    let!(:recruiter) { create(:user, :recruiter) }
+
+    context 'update custom search with valid payload' do
+      let!(:custom_search) { create(:candidate_search_parameter, :senior_programmer, user_id: recruiter.id) } 
+      let!(:valid_payload) { 
+        {
+          programming_languages: 'Ruby, Elixir, JavaScript, C',
+          search_type: 'exact',
+          title_search: 'Senior Software Architect'
+        }
+      }.to_json
+
+      it 'before update' do 
+        expect(custom_search.title_search).to eq('Senior Software Engineer')
+      end
+
+      before { patch "/dashboard/#{custom_search.id}/update-candidate-search-configuration", params: valid_payload, headers: headers }
+
+      it 'returns 204 status code' do 
+        expect(response).to have_http_status(204)
+      end
+
+      it 'after update' do 
+        expect(custom_search.reload.title_search).to eq('Senior Software Architect')
+      end
+    end
+  end
 end
