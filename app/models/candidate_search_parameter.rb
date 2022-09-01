@@ -1,6 +1,12 @@
 class CandidateSearchParameter < ApplicationRecord
   belongs_to :user
 
+  validates :configuration_label,
+            :title_search,
+            :country,
+            :search_type, 
+            presence: true
+
   def schools_attended
     educational_background.split(', ')
   end

@@ -12,4 +12,5 @@ RSpec.describe User, type: :model do
   # associations
   it { should have_many(:candidate_trackings) }
   it { should have_many(:tracked_candidates).through(:candidate_trackings).source(:candidate) }
+  it { should have_many(:custom_searches).class_name('CandidateSearchParameter') }
 end

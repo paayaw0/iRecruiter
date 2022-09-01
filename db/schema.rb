@@ -28,6 +28,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_01_115134) do
     t.datetime "updated_at", null: false
     t.string "title_search"
     t.string "keyword_search"
+    t.string "level_of_skill"
+    t.string "configuration_label"
+    t.string "search_type"
     t.index ["user_id"], name: "index_candidate_search_parameters_on_user_id"
   end
 

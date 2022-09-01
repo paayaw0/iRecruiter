@@ -13,4 +13,9 @@ class CandidateSerializer
              :sex, 
              :years_of_experience, 
              :experience_level  
+             
+# has_many :tracking_recruiters, through: :candidate_trackings, source: :user, record_type: :user
+  
+# this works same as above commmented. comments kept for future reference
+  has_many :tracking_recruiters, serializer: UserSerializer
 end

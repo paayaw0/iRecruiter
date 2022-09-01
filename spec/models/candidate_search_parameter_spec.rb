@@ -5,4 +5,10 @@ RSpec.describe CandidateSearchParameter, type: :model do
 
   # association
   it { should belong_to(:user) } 
+
+  # validations 
+  it { should validate_presence_of(:configuration_label) }
+  it { should validate_presence_of(:title_search) }
+  it { should validate_presence_of(:country) }
+  it { should validate_presence_of(:search_type) }
 end
