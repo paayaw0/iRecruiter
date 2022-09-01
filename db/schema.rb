@@ -10,9 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_21_101441) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_01_115134) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "candidate_search_parameters", force: :cascade do |t|
+    t.boolean "employment_status"
+    t.string "city"
+    t.string "country"
+    t.text "employment_history"
+    t.text "educational_background"
+    t.text "programming_languages"
+    t.text "web_frameworks"
+    t.text "other_technologies"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "title_search"
+    t.string "keyword_search"
+    t.index ["user_id"], name: "index_candidate_search_parameters_on_user_id"
+  end
 
   create_table "candidate_trackings", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -94,6 +111,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_21_101441) do
     t.boolean "recruiter", default: false
   end
 
+  add_foreign_key "candidate_search_parameters", "users"
   add_foreign_key "candidate_trackings", "candidates"
   add_foreign_key "candidate_trackings", "users"
   add_foreign_key "educational_backgrounds", "candidates"
