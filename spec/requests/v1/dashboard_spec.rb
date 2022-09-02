@@ -176,4 +176,80 @@ RSpec.describe 'Dashboards', type: :request do
       end
     end
   end
+
+  describe 'DELETE /dashboard/:id/remove-custom-search' do 
+    let!(:recruiter) { create(:user, :recruiter) }
+
+    context 'delete custom search' do 
+      let!(:custom_search) { create(:candidate_search_parameter, :senior_programmer, user_id: recruiter.id) }
+
+      it 'deletes custom_search' do 
+        expect{ delete "/dashboard/#{custom_search.id}/remove-custom-search", headers: headers }.to change(CandidateSearchParameter, :count).by(-1)
+      end
+
+      it 'return 204 no content' do 
+        delete "/dashboard/#{custom_search.id}/remove-custom-search", headers: headers
+        expect(response).to have_http_status(204)
+      end
+    end
+  end
+
+  describe 'POST /dashboard/track-candidate' do
+    let!(:recruiter) { create(:user, :recruiter) }
+
+    context 'recruiter can track candidate' do 
+      let(:candidate1) { create(:candidate) }
+      let!(:candidate2) { create(:candidate) }
+
+      let!(:valid_payload) {
+        {
+          data: 
+            {
+              type: "candidate",
+              id: "#{candidate1.id}"
+            }
+        }
+      }.to_json
+      
+
+      it 'successfully tracked candidate' do 
+        post "/dashboard/track-candidate", params: valid_payload, headers: headers
+        expect(recruiter.tracked_candidates.last).to eq(candidate1)
+      end
+
+      it 'returns 204 status' do 
+        post "/dashboard/track-candidate", params: valid_payload, headers: headers
+        expect(response).to have_http_status(204)
+      end
+
+      it 'creates the relationship in join model' do 
+        expect{ post "/dashboard/track-candidate", params: valid_payload, headers: headers }.to change(CandidateTracking, :count).by(1)
+      end
+    end
+  end
+
+  describe 'DELETE /dashboard/untrack-candidate' do
+    let!(:recruiter) { create(:user, :recruiter) }
+
+    context 'recruiter can untrack candidate' do 
+      let(:candidate1) { create(:candidate) }
+      let!(:candidate2) { create(:candidate) }
+
+      before { recruiter.tracked_candidates << candidate2 }    
+
+      it 'successfully untracked candidate' do 
+        delete "/dashboard/#{candidate2.id}/untrack-candidate", headers: headers
+        expect(recruiter.tracked_candidates.reload).to be_empty
+      end
+
+      it 'returns 204 status' do 
+        delete "/dashboard/#{candidate2.id}/untrack-candidate", headers: headers
+        expect(response).to have_http_status(204)
+      end
+
+      it 'creates the relationship in join model' do 
+        expect{ delete "/dashboard/#{candidate2.id}/untrack-candidate", headers: headers }.to change(CandidateTracking, :count).by(-1)
+      end
+    end
+  end
 end

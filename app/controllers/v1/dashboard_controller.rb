@@ -1,6 +1,6 @@
 module V1
   class DashboardController < ApplicationController
-    before_action :set_custom_search, only: [:update]
+    before_action :set_custom_search, only: [:update, :destroy]
 
     def hiring_pipeline
       if current_user.tracked_candidates.empty?
@@ -36,7 +36,14 @@ module V1
     def update
       @custom_search.update!(custom_search_params)
       @custom_search = CandidateSearchParameterSerializer.new(@custom_search).serializable_hash.to_json
-      json_response(@custom_search, :no_content)
+      
+      head :no_content
+    end
+
+    def destroy 
+      @custom_search.destroy!
+
+      head :no_content
     end
 
     def custom_searches
@@ -58,9 +65,19 @@ module V1
       end
     end
 
-    def track_candidate; end
+    def track_candidate
+      candidate = Candidate.find(params[:data][:id])
+      current_user.tracked_candidates << candidate
 
-    def untrack_candidate; end
+      head :no_content
+    end
+
+    def untrack_candidate
+      candidate = Candidate.find(params[:candidate_id])
+      current_user.tracked_candidates.delete(candidate)
+
+      head :no_content
+    end
 
     private
 
