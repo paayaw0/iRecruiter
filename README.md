@@ -16,3 +16,4 @@ another update to readme
 another update to readme
 another update to readme
 another update to readme: hot fix
+another update to readme: enhancement
