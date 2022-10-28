@@ -19,3 +19,4 @@ another update to readme: hot fix
 another update to readme: enhancement
 another update to readme: bug fix
 another update to readme: without label
+another update to readme: feature_x
