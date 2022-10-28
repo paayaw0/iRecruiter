@@ -18,4 +18,4 @@ another update to readme
 another update to readme: hot fix
 another update to readme: enhancement
 another update to readme: bug fix
-another update to readme: feature 1
+another update to readme: without label
