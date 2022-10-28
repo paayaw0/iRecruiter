@@ -1,5 +1,9 @@
 # Changelog
 
+## [v1.0.0](https://github.com/paayaw0/iRecruiter/tree/v1.0.0) (2022-10-28)
+
+[Full Changelog](https://github.com/paayaw0/iRecruiter/compare/v0.2...v1.0.0)
+
 ## [v0.2](https://github.com/paayaw0/iRecruiter/tree/v0.2) (2022-10-28)
 
 [Full Changelog](https://github.com/paayaw0/iRecruiter/compare/v0.1...v0.2)
