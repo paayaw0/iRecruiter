@@ -10,6 +10,11 @@ jobs:
     - name: name current branch
       run: |
         git branch
+    - name: "Build Changelog"
+      id: build_changelog
+      uses: mikepenz/release-changelog-builder-action@{latest-release}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: create file
       run: | 
         ls -a
