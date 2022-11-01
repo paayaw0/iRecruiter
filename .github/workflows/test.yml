@@ -10,5 +10,5 @@ jobs:
     steps:
     - name: create text file
       run: | 
-        ./github/workflows/touch test.txt
-        echo 'hello world'
+        touch ./github/workflows/test.txt
+        echo 'hello world' >> .github/workflows/test.txt
