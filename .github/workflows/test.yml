@@ -11,10 +11,9 @@ jobs:
       run: |
         git branch
     - name: "Build Changelog"
-    - id: build_changelog
     - uses: heinrichreimer/github-changelog-generator-action@v2.3
-    - env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }} 
     - name: create file
       run: | 
         ls -a
