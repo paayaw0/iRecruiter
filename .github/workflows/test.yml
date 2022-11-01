@@ -1,7 +1,6 @@
 name: Test Build
 
-on: 
-  push: [main]
+on: [push]
   
 jobs:
   build-changelog:
