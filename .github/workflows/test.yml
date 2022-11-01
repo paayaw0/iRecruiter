@@ -5,6 +5,9 @@ on:
     - main
   
   runs-on: ubuntu-latest
+
+jobs:
+  build-changelog:
   
   
   steps:
