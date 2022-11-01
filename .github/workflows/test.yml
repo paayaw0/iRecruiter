@@ -8,5 +8,6 @@ jobs:
     steps:
     - name: create file
       run: | 
+        ls
         touch ${GITHUB_WORKSPACE}/test.txt
         
