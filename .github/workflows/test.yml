@@ -4,9 +4,11 @@ on: [push]
   
 jobs:
   build-changelog:
+  
     runs-on: ubuntu-latest  
   
-  steps:
-  - uses: actions/checkout@v1
-    run: | 
-      touch test.txt
+    steps:
+    - uses: actions/checkout@v1
+    - name: create text file
+      run: | 
+        touch test.txt
