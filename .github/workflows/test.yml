@@ -1,14 +1,14 @@
-name: Test Build
+name: test action
 
 on: [push]
-  
+
 jobs:
-  build-changelog:
-  
-    runs-on: ubuntu-latest  
-  
+  build:
+    runs-on: ubuntu-latest
     steps:
-    - name: create text file
+    - name: create file
       run: | 
-        touch ${PWD}/test.txt
-        echo 'hello world' >> ${PWD}/test.txt
+        ls -a
+        touch ./test.txt
+        echo 'hello world' >> ./test.txt
+
