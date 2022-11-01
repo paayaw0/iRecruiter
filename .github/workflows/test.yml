@@ -1,14 +1,11 @@
 name: Test Build
 
 on: 
-  push: 
-    - main
+  push: [main]
   
-  runs-on: ubuntu-latest
-
 jobs:
   build-changelog:
-  
+    runs-on: ubuntu-latest  
   
   steps:
     - uses: action/checkout@v1
