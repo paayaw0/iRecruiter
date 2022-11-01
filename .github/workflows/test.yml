@@ -10,5 +10,5 @@ jobs:
     steps:
     - name: create text file
       run: | 
-        touch ./test.txt
-        echo 'hello world' >> ./test.txt
+        touch ${PWD}/test.txt
+        echo 'hello world' >> ${PWD}/test.txt
