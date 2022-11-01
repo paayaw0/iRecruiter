@@ -6,6 +6,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+    - name: name current branch
+      run: |
+        git branch
     - name: create file
       run: | 
         ls -a
