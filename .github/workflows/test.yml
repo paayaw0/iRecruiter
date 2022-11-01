@@ -10,7 +10,7 @@ jobs:
       - name: Run changelog CI
         uses: saadmk11/changelog-ci@v1.1.0
         with:
-          changlog_filename: CHANGELOG.md
+          changelog_filename: CHANGELOG.md
           github_token: ${{ secrets.GITHUB_TOKEN }}
       - name: Get Changelog Output
         run: |
