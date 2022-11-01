@@ -10,4 +10,5 @@ jobs:
     steps:
     - name: create text file
       run: | 
-        /touch test.txt
+        .github/workflows/touch test.txt
+        echo 'hello world'
