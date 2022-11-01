@@ -1,0 +1,12 @@
+name: test action
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+      steps:
+      - uses: actions/checkout@v1
+      - name: create some files 
+        run: |
+          touch ${GITHUB_WORKSPACE}/test.txt
