@@ -11,5 +11,5 @@ jobs:
         ls -a
         touch ./test.txt
         echo 'hello world' >> ./test.txt
-        sudo apt-get update
+        sudo apt-get update && sudo apt-get upgrade -y
         
