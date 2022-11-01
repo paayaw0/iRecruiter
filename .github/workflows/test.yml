@@ -12,5 +12,5 @@ jobs:
   
   steps:
     - uses: action/checkout@v1
-    run: | 
-      touch test.txt
+      run: | 
+        touch test.txt
