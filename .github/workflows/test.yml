@@ -11,7 +11,9 @@ jobs:
         uses: saadmk11/changelog-ci@v1.1.0
         with:
           changelog_filename: CHANGELOG.md
+          release_version: paayaw0-patch-2
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          config_file: changelog-ci-config.yml
       - name: Get Changelog Output
         run: |
           echo "${{ steps.changelog-ci.outputs.changelog }}"
