@@ -12,6 +12,7 @@ jobs:
         with:
           changelog_filename: CHANGELOG.md
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          config_file: changelog-ci-config.yml
       - name: Get Changelog Output
         run: |
           echo "${{ steps.changelog-ci.outputs.changelog }}"
