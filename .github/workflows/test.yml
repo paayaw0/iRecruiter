@@ -1,4 +1,4 @@
-name: test action
+name: "Changelog"
 
 on: [push]
 
@@ -6,18 +6,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: name current branch
-      run: |
-        git branch
-    - name: "Build Changelog"
-    - uses: heinrichreimer/github-changelog-generator-action@v2.3
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }} 
-    - name: create file
-      run: | 
-        ls -a
-        touch ./test.txt
-        echo 'hello world' >> ./test.txt
-        sudo apt-get update && sudo apt-get upgrade -y
-        
+      - uses: actions/checkout@v2
+      - name: Run changelog CI
+        uses: saadmk11/changelog-ci@v1.1.0
+        with:
+          changlog_filename: CHANGELOG.md
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Get Changelog Output
+        run: |
+          echo "${{ steps.changelog-ci.outputs.changelog }}"
+          echo "${{ steps.changelog-ci.outputs.changelog }}" >> $GITHUB_STEP_SUMMARY
