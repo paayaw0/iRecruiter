@@ -42,6 +42,8 @@ gem "bootsnap", require: false
 # for serializing json responses
 gem 'jsonapi-serializer'
 
+# HTTP client
+gem 'net-http'
 # for docker gem install
 gem 'nokogiri'
 
