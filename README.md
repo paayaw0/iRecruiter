@@ -9,5 +9,6 @@ iRecruiter is a smart online tool for recruiting talent across the world. It is 
     • education 
     • network(list of friends, associates, etc)
     • level of social media activity(includes qualitative such as type of activity(ies) engaged in, quantity which amount/degree of interactions across social media platforms)
-    • current employment status, I.e, whether currently employed/and actively looking
-    • list of publications, projects/works(eg. Illustrations/artwork, software/application, documented projects), etc..
+    • current employment status, I.e, whether currently employed/and actively looking   
+    number of active github projects/level of OSS  
+    • list of publications, projects/works(eg. Illustrations/artwork, software/application, documented projects), etc.
