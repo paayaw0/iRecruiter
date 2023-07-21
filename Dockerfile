@@ -1,4 +1,4 @@
-FROM ruby:3.2-rc-slim-bullseye 
+FROM ruby:3.2.0
 
 RUN apt-get update -yqq && apt-get install -yqq \
   nodejs \
@@ -10,6 +10,7 @@ RUN apt-get update -yqq && apt-get install -yqq \
   zlib1g-dev \
   liblzma-dev \
   libpq-dev 
+ENV BUNDLE_PATH /gems
 
 COPY Gemfile* /usr/src/workspace/ 
 

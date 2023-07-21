@@ -7,6 +7,7 @@ services:
       - "3000:3000"
     volumes:
       - .:/usr/src/workspace
+      - gem_path:/gems
     env_file:
       - .env/development/database 
       - .env/development/web 
@@ -24,3 +25,4 @@ services:
 
 volumes:
   db_data:
+  gem_path:
