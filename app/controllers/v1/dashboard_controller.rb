@@ -10,7 +10,7 @@ module V1
               {
                 message: 'You are not tracking any candidate',
                 links: {
-                  self: dashboard_search_configuration_path
+                  self: dashboard_hiring_pipeline_path
                 }
               }
           }
@@ -54,7 +54,7 @@ module V1
             {
               message: 'You have no custom searches',
               links: {
-                self: dashboard_search_configuration_path
+                self: dashboard_custom_searches_path
               }
             }
           }

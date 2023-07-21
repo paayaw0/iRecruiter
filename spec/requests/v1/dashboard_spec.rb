@@ -56,7 +56,7 @@ RSpec.describe 'Dashboards', type: :request do
         end
 
         it 'should have link to search_configuration endpoint' do
-          expect(json['data']['links']['self']).to eq(dashboard_search_configuration_path)
+          expect(json['data']['links']['self']).to eq(dashboard_hiring_pipeline_path)
         end
       end
     end
@@ -102,7 +102,7 @@ RSpec.describe 'Dashboards', type: :request do
         end
 
         it 'should have link to search_configuration endpoint' do
-          expect(json['data']['links']['self']).to eq(dashboard_search_configuration_path)
+          expect(json['data']['links']['self']).to eq(dashboard_custom_searches_path)
         end
       end
     end
