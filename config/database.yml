@@ -23,8 +23,9 @@ default: &default
   # host is database for docker-compose to recognize since postgres is running
   # inside container. web container connects to postgres container via database
   # username is default role created in database
-  host: database
-  username: postgres
+  host: <%= ENV.fetch("DATABASE_HOST") %>
+  username: <%= ENV.fetch("POSTGRES_USER") %>
+  password: <%= ENV.fetch("POSTGRES_PASSWORD") %>
 
 development:
   <<: *default
